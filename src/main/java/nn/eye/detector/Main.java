@@ -12,7 +12,14 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws IOException {
         List<ImageEyed> list = InputOutputUtils.getImagesFromFolder("D:\\dataset\\", "dataset.json","small");
-        List<BufferedImage> listToSave = new ArrayList<BufferedImage>();
+
+        final List<BufferedImage> images = new ArrayList<BufferedImage>();
+
+        for (ImageEyed imageEyed : list) {
+            images.add(imageEyed.getBufferedImage());
+        }
+
+        List<BufferedImage> listToSave = new FragmentSearcher().search(images);
         for(ImageEyed image : list){
             listToSave.add(image.getBufferedImage());
         }
