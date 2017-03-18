@@ -5,7 +5,6 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 import org.opencv.objdetect.Objdetect;
-import org.opencv.videoio.VideoCapture;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -14,14 +13,11 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 public class FragmentSearcher {
     private ScheduledExecutorService timer;
     private CascadeClassifier faceCascade;
-    private VideoCapture capture;
     private int absoluteFaceSize;
 
     public FragmentSearcher() {
@@ -30,11 +26,9 @@ public class FragmentSearcher {
     public List<BufferedImage> search(List<BufferedImage> images) {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
         List<BufferedImage> result = new ArrayList<BufferedImage>();
-        capture = new VideoCapture();
         faceCascade = new CascadeClassifier();
-        faceCascade.load("/home/alex/My/NN/nn-usb/src/main/resources/haarcascade_eye.xml");
+        faceCascade.load("D:\\JavaPrj\\nn-usb\\src\\main\\resources\\haarcascade_eye.xml");
         absoluteFaceSize = 0;
-        capture.open(0);
 
         for (BufferedImage image : images) {
             result.add(proccessImage(image));
@@ -76,17 +70,8 @@ public class FragmentSearcher {
     private BufferedImage proccessImage(BufferedImage image) {
         BufferedImage imageToShow = null;
         Mat frame = bufferedImageToMat(image);
-//        if (this.capture.isOpened()) {
-//            try {
-//                this.capture.read(frame);
-//                if (!frame.empty()) {
-                    detectAndDisplay(frame);
-                    imageToShow = mat2Image(frame);
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+        detectAndDisplay(frame);
+        imageToShow = mat2Image(frame);
         return imageToShow;
     }
 

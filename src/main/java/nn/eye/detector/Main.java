@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        List<ImageEyed> list = InputOutputUtils.getImagesFromFolder("D:\\dataset\\", "dataset.json","small");
+        List<ImageEyed> list = InputOutputUtils.getImagesFromFolder("D:\\JavaPrj\\nn-usb\\src\\main\\resources\\dataset\\", "dataset.json","small");
 
         final List<BufferedImage> images = new ArrayList<BufferedImage>();
 
