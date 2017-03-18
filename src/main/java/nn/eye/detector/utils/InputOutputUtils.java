@@ -55,4 +55,12 @@ public class InputOutputUtils {
 
         return list;
     }
+
+    public static void saveImagesToFolder(String folder, List<BufferedImage> images) throws IOException {
+        int i = 0;
+        for(BufferedImage image : images){
+            File outputfile = new File(folder + i++ + ".png");
+            ImageIO.write(image, "png", outputfile);
+        }
+    }
 }
